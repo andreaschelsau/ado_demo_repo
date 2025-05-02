@@ -21,3 +21,10 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+# Adding a PowerShell script with timeout
+- powershell: |
+    Write-Host "This is a PowerShell script with a timeout."
+    Start-Sleep -Seconds 120  # Simulate a longer-running task
+  displayName: 'Run PowerShell script with 1-minute timeout'
+  timeoutInMinutes: 1  # Timeout set to 1 minute
