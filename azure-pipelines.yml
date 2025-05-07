@@ -10,6 +10,11 @@ pr:
     include:
       - main      # Trigger only when PR targets 'main' branch
 
+pr:
+  branches:
+    include:
+      - '*'
+
 pool:
   name: Default
 
