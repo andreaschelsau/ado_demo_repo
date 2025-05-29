@@ -13,9 +13,8 @@ pr:
 pool:
   name: Default
 stages:
-- stage: stage_1
+- stage:
   lockBehavior: sequential
-  displayName: Stage 1
   jobs:
     - job: job_pre_server
       pool: server
