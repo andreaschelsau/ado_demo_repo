@@ -11,21 +11,44 @@ pr:
       - main      # Trigger only when PR targets 'main' branch
 
 pool:
-  name: Azure Pipelines
-  vmImage: windows-latest
+  name: Default
+stages:
+- stage: stage_1
+  lockBehavior: sequential
+  displayName: Stage 1
+  jobs:
+    - job: job_pre_server
+      pool: server
+      steps:
+      - task: manualvalidation@0
+        inputs:
+          notifyusers: 'abc@abc.com'
+          instructions: 'confirm deploy logging'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+    - job: job_1
+      steps:
+      - script: echo Hello job_1, $(name)!
+        displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+      - script: |
+          echo Add other tasks to build, test, and deploy your project.
+          echo ping 127.0.0.1 -n 10
+          echo See https://aka.ms/yaml
+        displayName: 'Run a multi-line script'
+        
+- stage: stage_2
+  displayName: Stage 2
+  jobs:
+    - job: job_3
+      steps:
+      - script: echo Hello job_3, $(name)!
+        displayName: 'Run a one-line script'
 
-# Adding a PowerShell script with timeout
-- powershell: |
-    Write-Host "This is a PowerShell script with a timeout."
-    Start-Sleep -Seconds 120  # Simulate a longer-running task
-  displayName: 'Run PowerShell script with 1-minute timeout'
-  timeoutInMinutes: 1  # Timeout set to 1 minute
+- stage: stage_3
+  group: proj1
+  displayName: Stage 3
+  jobs:
+    - job: job_4
+      steps:
+      - script: echo Hello job_3, $(name)!
+        displayName: 'Run a one-line script'
