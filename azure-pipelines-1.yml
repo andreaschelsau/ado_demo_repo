@@ -1,0 +1,36 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml333
+
+trigger: none    # Disable CI trigger (on push)
+
+pr:
+  branches:
+    include:
+      - main      # Trigger only when PR targets 'main' branch
+
+pool:
+  name: Default
+stages:
+- stage:
+  lockBehavior: sequential
+  jobs:
+    - job: job_pre_server
+      pool: server
+      steps:
+      - task: manualvalidation@0
+        inputs:
+          notifyusers: 'abc@abc.com'
+          instructions: 'confirm deploy logging'
+
+    - job: job_1
+      steps:
+      - script: echo Hello job_1, $(name)!
+        displayName: 'Run a one-line script'
+
+      - script: |
+          echo Add other tasks to build, test, and deploy your project.
+          echo ping 127.0.0.1 -n 10
+          echo See https://aka.ms/yaml
+        displayName: 'Run a multi-line script'
