@@ -34,3 +34,10 @@ stages:
           echo ping 127.0.0.1 -n 10
           echo See https://aka.ms/yaml
         displayName: 'Run a multi-line script'
+        
+- stage: 
+  jobs:
+    - job: job_3
+      steps:
+      - script: echo Hello job_3, $(name)!
+        displayName: 'Run a one-line script'
