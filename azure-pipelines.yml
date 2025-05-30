@@ -11,7 +11,8 @@ pr:
       - main      # Trigger only when PR targets 'main' branch
 
 pool:
-  name: Default
+  vmImage: windows-latest
+  name: Azure Pipelines
 stages:
 - stage:
   lockBehavior: sequential
