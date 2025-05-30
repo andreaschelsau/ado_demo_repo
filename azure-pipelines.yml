@@ -14,7 +14,8 @@ pool:
   vmImage: windows-latest
   name: Azure Pipelines
 stages:
-- stage:
+- stage: stage_1
+  displayName: Stage 1
   lockBehavior: sequential
   jobs:
     - job: job_pre_server
